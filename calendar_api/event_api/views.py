@@ -5,7 +5,6 @@ from rest_framework.decorators import api_view
 from event_api.models import Event
 from event_api.serializers import EventSerializer
 
-
 @api_view(['GET', 'POST'])
 def events(request):
     '''GET/events and POST/events are handled here'''
@@ -13,6 +12,7 @@ def events(request):
         event_list = Event.objects.all() 
         event_serializer = EventSerializer(event_list, many=True)
         return JsonResponse(event_serializer.data, safe=False)
+
     if request.method == 'POST':
         event_data = JSONParser().parse(request)
         event_serializer = EventSerializer(data=event_data)
@@ -32,11 +32,16 @@ def event_detail(request, pk):
             return JsonResponse({'message': 'Event was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
         except Event.DoesNotExist: 
             return JsonResponse({'message': 'The specified event does not exist'}, status=status.HTTP_404_NOT_FOUND) 
-    if request.method == 'PUT': 
-        event_data = JSONParser().parse(request) 
-        event_serializer = EventSerializer(event, data=event_data) 
-        if event_serializer.is_valid(): 
-            event_serializer.save() 
-            return JsonResponse(event_serializer.data) 
-        return JsonResponse(event_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    if request.method == 'PUT':
+        try:
+            event = Event.objects.get(pk=pk) 
+            event_data = JSONParser().parse(request)
+            event_serializer = EventSerializer(event, data=event_data) 
+            if event_serializer.is_valid(): 
+                event_serializer.save() 
+                return JsonResponse(event_serializer.data) 
+            return JsonResponse(event_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Event.DoesNotExist: 
+            return JsonResponse({'message': 'The specified event does not exist'}, status=status.HTTP_404_NOT_FOUND) 
     return JsonResponse({}, status=status.HTTP_404_NOT_FOUND)
