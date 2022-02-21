@@ -10,7 +10,7 @@ import Cell from '../Cell/Cell';
 export default function Calendar(): JSX.Element {
 
   const DaysOfFebruary = useMemo<JSX.Element[]>(() => {
-    const arrayOfCells = [<div/>,<div/>,<div/>];
+    const arrayOfCells = [<div/>,<div/>];
     for(let i=1; i <= 28; ++i){
       arrayOfCells.push(<Cell key={i} />)
     }
