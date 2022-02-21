@@ -14,7 +14,6 @@ function App() {
   return (
     <div className="App" style={appStyles}>
         <Navbar month="February" year={2022}>
-          <button />
         </Navbar>
         <Calendar />
     </div>

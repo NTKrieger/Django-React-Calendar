@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { RootState, AppThunk } from '../app/store';
 import {resIsError} from '../utils/helperRepo';
 import {getEvents, createEvent, updateEvent, deleteEvent} from '../api/eventApi';
 
@@ -45,14 +44,14 @@ export const deleteEventAsync = createAsyncThunk(
 export const eventSlice = createSlice({
   name: 'event',
   initialState : {
-    showSidebar: false,
+    focusEventId: null,
     errors: [],
     events: [],
   },
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    toggleSidebar: (state) => {
-      state.showSidebar = !state.showSidebar;
+    setFocusEventId: (state, action) => {
+      state.selectedEventId = action.payload;
     },
     clearErrors: (state) => {
       state.errors = [];
@@ -117,17 +116,16 @@ export const eventSlice = createSlice({
         state.events.push(action.payload);
         // TODO: Error Toast
       })
-
   },
 });
 
 // Export actions
-export const { toggleSidebar, clearErrors, addErrorToQueue } = eventSlice.actions;
+export const { setFocusEventId, clearErrors, addErrorToQueue } = eventSlice.actions;
 
 // Export selectors for the Event Slice
 export const selectEvents = (state) => state.events;
 export const selectErrors = (state) => state.errors;
-export const selectSidebarVisibility = (state) => state.showSidebar;
+export const selectFocusEventId = (state) => state.showSidebar;
 
 // Export reducer
 export default eventSlice.reducer;
