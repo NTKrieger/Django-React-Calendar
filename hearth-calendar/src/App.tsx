@@ -3,11 +3,12 @@ import Calendar from './components/Calendar/Calendar'
 import Navbar from './components/Navbar/Navbar';
 
 function App() {
+
   const appStyles = {
     height: window.visualViewport.height, 
     width: window.visualViewport.width, 
     overscrollBehavior: 'none',
-    overflow: 'none',
+    overflow: 'hidden',
   }
   
   return (

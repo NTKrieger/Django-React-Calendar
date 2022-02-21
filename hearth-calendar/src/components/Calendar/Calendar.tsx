@@ -10,16 +10,17 @@ import Cell from '../Cell/Cell';
 export default function Calendar(): JSX.Element {
 
   const DaysOfFebruary = useMemo<JSX.Element[]>(() => {
-    const arrayOfCells = [<div/>,<div/>];
+    const EmptyCell = <span className="border-b border-gray-900"/>
+    const arrayOfCells = [EmptyCell, EmptyCell];
     for(let i=1; i <= 28; ++i){
-      arrayOfCells.push(<Cell key={i} />)
+      arrayOfCells.push(<Cell day={i} />)
     }
     return arrayOfCells;
   }, []);
 
   return (
-    <div className={"w-full bg-gray-300 h-6/7"}>
-      <div className={"grid grid-cols-7 text-center text-2xl font-bold text-gray-900 h-1/10 pt-5 border-b-2"}>
+    <div className={"w-full h-6/7"}>
+      <div className={"grid grid-cols-7 text-center text-2xl font-bold text-gray-900 py-2 border-b-2"}>
         <div>Su</div>
         <div>Mo</div>
         <div>Tu</div>
@@ -28,7 +29,7 @@ export default function Calendar(): JSX.Element {
         <div>Fr</div>
         <div>Sa</div>
       </div>
-      <div className={"grid grid-cols-7 text-right text-2xl font-bold text-gray-900 h-1/7"}>
+      <div className={"grid grid-cols-7 text-right text-2xl font-bold text-gray-900 h-full auto-rows-auto"}>
         {DaysOfFebruary}
       </div>
     </div>
