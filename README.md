@@ -11,3 +11,4 @@ https://dmitripavlutin.com/typescript-react-components/
 https://zellwk.com/blog/calendar-with-css-grid/
 https://www.freecodecamp.org/news/react-typescript-how-to-set-up-types-on-hooks
 https://www.w3schools.com/css/default.asp
+https://tailwindcss.com/docs/guides/create-react-app

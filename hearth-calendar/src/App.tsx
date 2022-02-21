@@ -7,11 +7,12 @@ function App() {
     height: window.visualViewport.height, 
     width: window.visualViewport.width, 
     overscrollBehavior: 'none',
+    overflow: 'none',
   }
   
   return (
     <div className="App" style={appStyles}>
-        <Navbar month="February">
+        <Navbar month="February" year={2022}>
           <button />
         </Navbar>
         <Calendar />
